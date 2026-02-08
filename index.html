@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>UvosoftTech — Initializing</title>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://uvosofttech.com/"/>
+  <link rel="stylesheet" href="css/global.css">
+</head>
+<body class="intro-body">
+
+<div class="intro-wrap" id="introWrap">
+  <div class="scanline"></div>
+
+  <div class="intro-terminal">
+    <div class="intro-line" id="l1"></div>
+    <div class="intro-line" id="l2"></div>
+    <div class="intro-line" id="l3"></div>
+    <div class="intro-line" id="l4"></div>
+  </div>
+
+  <div class="intro-logo">
+    <img src="assets/img/logo.png" alt="UvosoftTech">
+  </div>
+</div>
+
+<script>
+(function(){
+  const ran = sessionStorage.getItem("uv_intro_ran");
+  if (ran === "1") { window.location.href = "home.html"; return; }
+
+  const lines = [
+    "INITIALIZING UVOSOFT TECH...",
+    "LOADING ENTERPRISE MODULES...",
+    "AUTHORIZING EXPERIENCE...",
+    "ROUTING TO HOME..."
+  ];
+  const els = [l1,l2,l3,l4];
+  let i = 0;
+
+  function typeLine(text, el, cb){
+    let p = 0;
+    const t = setInterval(()=>{
+      el.textContent = text.slice(0, p++);
+      if (p > text.length) { clearInterval(t); cb && cb(); }
+    }, 35);
+  }
+
+  function run(){
+    if (i >= lines.length) {
+      sessionStorage.setItem("uv_intro_ran","1");
+      setTimeout(()=> window.location.href="home.html", 400);
+      return;
+    }
+    typeLine(lines[i], els[i], ()=>{ i++; setTimeout(run, 220); });
+  }
+
+  setTimeout(run, 450);
+})();
+</script>
+
+</body>
+</html>
